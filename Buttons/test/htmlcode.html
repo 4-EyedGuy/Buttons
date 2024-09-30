@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Door and Light Control</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282828;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script>
+        let doorOpen = false;
+        let lightOn = false;
+
+        let lightColor = '#000043';
+
+        let doorButton, lightButton;
+
+        function setup() {
+            createCanvas(800, 800);
+
+            doorButton = createButton(' ');
+            doorButton.position(250, 550);
+            doorButton.style('width', '40px');
+            doorButton.style('height', '40px');
+            doorButton.style('background-color', 'red');
+            doorButton.mousePressed(toggleDoor);
+
+            lightButton = createButton(' ');
+            lightButton.position(250, 600);
+            lightButton.style('width', '40px');
+            lightButton.style('height', '40px');
+            lightButton.style('background-color', 'white');
+            lightButton.mousePressed(toggleLight);
+        }
+
+        function draw() {
+
+            background(40);
+
+            fill(lightColor);
+            rect(300, 300, 200, 300);
+
+            drawDoor();
+        }
+
+        function drawDoor() {
+
+            if (doorOpen) {
+                fill('#393939');
+                rect(300, 0, 200, 300);
+
+                fill('#ffd900');
+                rect(300, 0, 200, 40);
+                rect(300, 260, 200, 40);
+
+            } else {
+                fill('#393939');
+                rect(300, 300, 200, 300);
+
+                fill('#ffd900');
+                rect(300, 300, 200, 40);
+                rect(300, 560, 200, 40);
+            }
+        }
+
+        function toggleDoor() {
+            doorOpen = !doorOpen;
+        }
+
+        function toggleLight() {
+            lightOn = !lightOn;
+            if (lightOn) {
+                lightColor = '#cbe5ff'; // Включаем свет (голубоватый)
+            } else {
+                lightColor = '#000043'; // Выключаем свет (темный)
+            }
+        }
+    </script>
+
+</body>
+</html>
